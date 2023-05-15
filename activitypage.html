@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome!</title>
+</head>
+<body>
+    <h2> Welcome to Exploring Our Backyard! </h2>
+
+    <label for ="activities">Current activities!</label>
+    <select id ="activities">
+        <option > Select One</option>
+    </select>
+    <select id ="activities"></select>
+    <div id ="details"></div>
+    <div id = "order" style ="display:none"></div>
+    <h4>Order Here!</h4>
+
+    <form>
+        <input id = "tickets" name ="tickets" placeholder="Number Of Tickets needed">
+        <input id = "card" name ="card" placeholder="Credit Card Number" type ="number">
+        <input id = "email" name ="email" placeholder="Enter Email Address">
+        <input type = "reset" value ="Clear Form">
+
+    </form>
+    <button id = "purchase"> Purchase</button>
+    <p id = "message"></p>
+</body>
+<script>
+     const selectCategories = document.getElementById("categories")
+     const selectActivities = document.getElementById("activities")
+     const details = document.getElementById("details")
+     const order = document.getElementById("order")
+     const purchase = document.getElementById("purchase")
+     const message = document.getElementById("message")
+
+for(let i = 0; i< categories.length; i++){
+    let category = categories[i];
+    const option = document.createElement("option")
+    option.innerHTML = category
+    option.value = category
+    selectCategories.appendChild(option)
+}
+selectCategories.addEventListener("change", ()=>{
+    const category = selectCategories.selectedOptions[0].value
+    console.log(category)
+    details.innerHTML = "";
+    message.innerHTML = "";
+
+    order.style.display = "none"
+    selectActivites.innerHTML = "";
+
+    for( let i = 0; i< activities.length; i++){
+        const activity = activities[i];
+        if(activity.category == category){
+            console.log(activity.name)
+            let option = document.createElement("option");
+            option.innerHTML = activity.name
+            option.value = activity.id
+            selectActivities.appendChild(option);
+        }
+    }
+    selectActivities.setAttribute("size", selectActivities);
+});
+    let activity;
+
+    selectActivities.addEventListener("change", ()=>{
+        details.innerHTML= "";
+        message.innerHTML= "";
+
+        const id = selectActivities.selectedOptions[0].value
+        for(let i = 0; i<activities.length; i++){
+            activity = activities[i];
+            if(activity.id == id){
+                details.innerHTML = 
+                `<h4>Description:</h4> ${activity.description} <br>               
+                <h4>Location:</h4> ${activity.location}<br>               
+                <h4>Price:</h4> ${activity.price} <br>`
+            }
+        }
+
+    })
+
+</script>
+</html>
